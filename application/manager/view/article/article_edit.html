@@ -1,0 +1,216 @@
+<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="Bookmark" href="/favicon.ico" >
+<link rel="Shortcut Icon" href="/favicon.ico" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5shiv.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<![endif]-->
+{include file="../application/manager/view/header.html" /}
+<!--[if IE 6]>
+<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<!--/meta 作为公共模版分离出去-->
+
+<title>新增文章 - 资讯管理 - H-ui.admin v3.1</title>
+<meta name="keywords" content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
+<meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
+</head>
+<body>
+<article class="page-container">
+	<form class="form form-horizontal" id="form-article-edit">
+		<input type="hidden" name="id" id="id" value="{$articlexx.ID}">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>文章标题：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$articlexx.articletitle}" placeholder="" id="articletitle" name="articletitle">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>分类栏目：</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select name="articlecolumn" class="select">
+					<option value="{$articlexx.articlecolumn}" selected>{$articlecolumnname}</option>
+					<option value="1">新闻资讯</option>
+					<option value="2">技术知识</option>
+				</select>
+				</span> </div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">关键词：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$articlexx.keywords}" placeholder="" id="keywords" name="keywords">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">文章摘要：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<textarea name="abstract" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="$.Huitextarealength(this,200)">{$articlexx.abstract}</textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">文章作者：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$articlexx.author}" placeholder="" id="author" name="author">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">文章来源：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$articlexx.sources}" placeholder="" id="sources" name="sources">
+			</div>
+		</div>
+
+		<!--<div class="row cl">
+			<label class="form-label col-xs-2 col-sm-2"><span class="c-red">*</span>缩略图：</label>
+			<div class="formControls col-xs-10 col-sm-9">      
+                <div class="maskWraper f-l" style="width:150px; height:150px; border:solid 1px #ddd; padding:2px"><img id="imgPre0" src="__HUIJSCSS__/photo.png" width="150" height="150" style="display:black; border:0 #FFFFFF solid"></div>
+                <div class="mt-50 ml-10 f-l">
+                    <span class="btn-upload form-group">
+                        <a href="javascript:void();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
+                        <input type="file" multiple name="proimg" id="proimg0" class="input-file" onchange="preImg(this.id,'imgPre0');">
+                    </span>
+                    <br><label class="c-999">图片大小800×800像素(jpg/jpeg/gif/png)</label>
+                </div>
+			</div>
+		</div>-->
+		<div class="row cl">
+			<label class="form-label col-xs-2 col-sm-2"><span class="c-red">*</span>缩略图：</label>
+			<div class="formControls col-xs-10 col-sm-9">      
+                <div class="maskWraper f-l" id="result" style="width:150px; height:150px; border:solid 1px #ddd; padding:2px"><img id="imgPre0" src="__HUIJSCSS__/photo.png" width="150" height="150" style="display:black; border:0 #FFFFFF solid"></div>
+                <div class="mt-50 ml-10 f-l">
+					<input type="file" name="photo" id="photo">
+					<input type="button" name="b1" value="submit" onclick="fsubmit()">
+				</div>
+				<input type="hidden" name="thumb" id="thumb" value="{$articlexx.thumb}">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">文章内容：</label>
+			<div class="formControls col-xs-8 col-sm-9"> 
+				<script id="editor" type="text/plain" style="width:100%;height:400px;">{$articlexx.content}</script> 
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+				<button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存并提交审核</button>
+				<button onClick="article_save();" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存草稿</button>
+				<button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+			</div>
+		</div>
+	</form>
+</article>
+
+<!--_footer 作为公共模版分离出去-->
+{include file="../application/manager/view/footer.html" /}
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__HUIJSCSS__/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="__HUIJSCSS__/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" src="__HUIJSCSS__/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" src="__HUIJSCSS__/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="__HUIJSCSS__/lib/webuploader/0.1.5/webuploader.min.js"></script> 
+<script type="text/javascript" src="__HUIJSCSS__/lib/ueditor/1.4.3/ueditor.config.js"></script> 
+<script type="text/javascript" src="__HUIJSCSS__/lib/ueditor/1.4.3/ueditor.all.min.js"> </script> 
+<script type="text/javascript" src="__HUIJSCSS__/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+	
+	//表单验证
+	$("#form-article-edit").validate({
+		rules:{
+			/*articletitle:{
+				required:true,
+			},
+
+			articlecolumn:{
+				required:true,
+			},
+
+			keywords:{
+				required:true,
+			},
+			abstract:{
+				required:true,
+			},
+			author:{
+				required:true,
+			},
+			sources:{
+				required:true,
+			},*/
+
+
+		},
+		onkeyup:false,
+		focusCleanup:true,
+		success:"valid",
+		submitHandler:function(form){
+			$(form).ajaxSubmit({
+				type: 'post',
+				url: "{:request()->action()}/" ,
+				data:$("#form-article-edit").serialize(),
+				success: function(data){
+					if(data.name=='editerror'){
+						layer.msg(data.msg,{icon:1,time:1000});
+					}else{
+						layer.msg('编辑成功!',{icon:1,time:1000},function(){
+							var index = parent.layer.getFrameIndex(window.name);
+							parent.location.reload(); //刷新父页面
+							parent.layer.close(index);
+						});						
+					}					
+				},
+                error: function(XmlHttpRequest, textStatus, errorThrown){
+					layer.msg('error!',{icon:1,time:1000});
+				}
+			});
+		}
+	});
+	
+	var ue = UE.getEditor('editor');
+	
+});
+
+function fsubmit(){
+        var data = new FormData($('#form-article-edit')[0]);
+        $.ajax({
+            url: '../{:request()->controller()}/uppic',
+            type: 'POST',
+            data: data,
+            dataType: 'JSON',
+            cache: false,
+            processData: false,
+            contentType: false
+        }).done(function(ret){
+            if(ret['isSuccess']){
+				var result = '';
+                result += '<img src="/uploads/' + ret['photo']  + '" width="150" height="150" style="display:black; border:0 #FFFFFF solid">';
+                $('#result').html(result);
+				$('#thumb').val(ret['photo']);
+            }else{
+                alert('提交失敗');
+            }
+        });
+        return false;
+    }
+	
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

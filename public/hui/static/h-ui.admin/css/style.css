@@ -1,0 +1,8 @@
+@charset "utf-8";
+/* 你自己的样式 */
+
+/*分页*/
+.pagebox .dataTables_paginate .pagination {float: right; margin-right: 15px; clear: both;}
+.pagebox .dataTables_paginate .pagination li {float: left; padding: 0 10px; text-align:center; border:1px #CCC solid; color:#333; margin-right:6px}
+/*.pagebox .dataTables_paginate .pagination li.disabled {width: 50px;}*/
+.pagebox .dataTables_paginate .pagination li.active { background-color:#5A98DE; color:#FFF;}
