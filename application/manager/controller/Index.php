@@ -4,6 +4,7 @@ use app\manager\model\Sinouser;
 use think\Controller;
 use think\View;
 use think\Request;
+use think\Session;
 class index extends Controller
 {
     public function index()
@@ -16,7 +17,9 @@ class index extends Controller
 			$adminname=input('post.adminname');
 			$adminpass=input('post.adminpass');
 			if(empty($adminname) || empty($adminpass)){
-				$this->error("用户名或者密码不能为空");
+				$prompt['name']='loginerror';
+				$prompt['msg']='用户名或者密码不能为空！';
+				return json($prompt);
 			}
 			/*$data = SinouserModel::get('1');
 			 $this->assign('data', $data);
@@ -26,13 +29,15 @@ class index extends Controller
 			$where["LoginPwd"]=md5(md5($adminpass));
 			$result=$sinouser->find($where);
 			if($result){
-				echo "success";
+				Session::set("adminname",$adminname);
 			}else{
-				echo "fail";
+				$prompt['name']='loginerror';
+				$prompt['msg']='用户名或密码错误！';
+				return json($prompt);
+				exit;
 			}
-			return view('login');
 		}else{
-			return view('login');
+			return $this->fetch();
 		}		
     }
 	public function welcome()

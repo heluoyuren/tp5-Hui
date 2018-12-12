@@ -1,10 +1,10 @@
 <?php
 namespace app\manager\controller;
 use app\manager\model\Sinouser;
-use think\Controller;
+use app\manager\controller\Auth;
 use think\View;
 use think\Request;
-class Admin extends Controller
+class Admin extends auth
 {
     public function admin_list()
     {
