@@ -2,7 +2,7 @@
 namespace  app\manager\model;
 use think\Model;
 
-class Articlelist extends Model{
+class Productcategory extends Model{
 	/**
      * 根据属性获取一行记录
      * @param array $where
@@ -22,7 +22,7 @@ class Articlelist extends Model{
 		if($result===false){
 			return false;
         }else{
-			return $this->ID;
+			return $this->id;
         }
     }
 	 /**
@@ -73,7 +73,7 @@ class Articlelist extends Model{
     public function findAllByWhere($where = array(),$fileds="*",$order="id desc")
     {
  
-        return $this->field($fileds)->where( $where )->order($order)->select()->toArray();
+        return $this->field($fileds)->where( $where )->order($order)->select();
     }
 	/**
      * 查询全部数据有分页查询
